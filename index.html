@@ -3,23 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Тест: Геодезические исследования</title>
+  <title>Тест: Грузоперевозки</title>
   <style>
     :root{
-      /* ✅ Новый фон (цветовая схема) */
-      --bg1:#071a1e;   /* темный бирюзовый */
-      --bg2:#12233a;   /* темный сине-стальной */
+      /* ✅ Полностью новая “серая” гамма */
+      --bg1:#0f1115;   /* почти черный графит */
+      --bg2:#171b22;   /* темный slate */
+      --bg3:#1d222b;   /* карточки/слои */
+      --stroke: rgba(255,255,255,.12);
 
-      --text: rgba(255,255,255,.94);
-      --muted: rgba(255,255,255,.72);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
 
-      --ok:#19d39b;
-      --bad:#ff5c7a;
+      --ok:#9be7c4;    /* мягкий мятный */
+      --bad:#ff9aa9;   /* мягкий розовый */
 
-      --accent:#6ae4ff;
-      --accent2:#7c5cff;
+      --accent:#d6d7db;  /* светло-серый */
+      --accent2:#8a8f99; /* холодный серый */
 
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
       --radius: 22px;
 
       --headerH: 64px;
@@ -35,25 +37,24 @@
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
       color: var(--text);
 
-      /* ✅ Новый фон */
+      /* ✅ Серый фон + мягкие световые пятна */
       background:
-        radial-gradient(900px 520px at 18% 12%, rgba(106,228,255,.20), transparent 60%),
-        radial-gradient(900px 560px at 82% 18%, rgba(124,92,255,.18), transparent 58%),
+        radial-gradient(900px 520px at 16% 12%, rgba(255,255,255,.08), transparent 60%),
+        radial-gradient(900px 560px at 84% 18%, rgba(255,255,255,.06), transparent 58%),
         linear-gradient(160deg, var(--bg1), var(--bg2));
 
       min-height:100vh;
       overflow-x:hidden;
     }
 
-    /* subtle noise overlay */
     body::before{
       content:"";
       position:fixed;
       inset:0;
       pointer-events:none;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
       mix-blend-mode:overlay;
-      opacity:.18;
+      opacity:.16;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -65,8 +66,8 @@
       top:0;
       z-index:50;
       backdrop-filter: blur(14px);
-      background: rgba(7,11,24,.30);
-      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(15,17,21,.38);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav{
       display:flex;
@@ -87,11 +88,11 @@
     .brand .dot{
       width:10px;height:10px;border-radius:50%;
       background: radial-gradient(circle at 30% 30%, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px rgba(106,228,255,.45);
+      box-shadow: 0 0 18px rgba(255,255,255,.12);
       flex: 0 0 auto;
     }
     .brand span{
-      background: linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.80));
+      background: linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.78));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -110,7 +111,7 @@
       transition: transform .15s ease, background .2s ease, color .2s ease;
     }
     .navlinks a:hover{
-      background: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.06);
       color: var(--text);
       transform: translateY(-1px);
     }
@@ -119,8 +120,8 @@
 
     /* Cards */
     .card{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -132,15 +133,15 @@
       inset:-1px;
       border-radius: inherit;
       pointer-events:none;
-      opacity:.45;
+      opacity:.35;
       background:
-        radial-gradient(420px 240px at 20% 10%, rgba(106,228,255,.18), transparent 60%),
-        radial-gradient(420px 240px at 80% 20%, rgba(124,92,255,.16), transparent 60%);
+        radial-gradient(520px 280px at 18% 8%, rgba(255,255,255,.08), transparent 60%),
+        radial-gradient(520px 280px at 82% 18%, rgba(255,255,255,.06), transparent 60%);
       mix-blend-mode: screen;
     }
     .cardHeader{
       padding: 16px 16px 12px;
-      border-bottom: 1px solid rgba(255,255,255,.10);
+      border-bottom: 1px solid rgba(255,255,255,.08);
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
@@ -178,11 +179,8 @@
       border-radius: var(--radius);
       overflow:hidden;
       min-height: 380px;
-      border: 1px solid rgba(255,255,255,.14);
-      background:
-        radial-gradient(700px 420px at 30% 20%, rgba(106,228,255,.12), transparent 55%),
-        radial-gradient(700px 420px at 70% 30%, rgba(124,92,255,.10), transparent 55%),
-        rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
       box-shadow: var(--shadow);
     }
     .heroMedia img{
@@ -191,12 +189,12 @@
       object-fit: cover;
       display:block;
       transform: scale(1.01);
-      filter: saturate(1.05) contrast(1.05);
+      filter: saturate(1.0) contrast(1.05) grayscale(.05);
     }
     .heroOverlay{
       position:absolute;
       inset:0;
-      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.72));
+      background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.78));
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
@@ -210,33 +208,32 @@
       width:fit-content;
       padding: 8px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(0,0,0,.22);
-      color: rgba(255,255,255,.88);
+      color: rgba(255,255,255,.86);
       font-size: 13px;
       backdrop-filter: blur(10px);
     }
 
-    /* big title */
     h1{
       margin: 0;
       font-size: clamp(30px, 4.4vw, 52px);
       line-height: 1.02;
       letter-spacing: -0.9px;
       font-weight: 950;
-      text-shadow: 0 14px 40px rgba(0,0,0,.55);
+      text-shadow: 0 14px 40px rgba(0,0,0,.65);
     }
     .titleAccent{
       display:inline-block;
       padding-bottom: 4px;
-      background: linear-gradient(90deg, rgba(106,228,255,.95), rgba(124,92,255,.95));
+      background: linear-gradient(90deg, rgba(255,255,255,.96), rgba(255,255,255,.72));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
     .lead{
       margin: 0;
-      color: rgba(255,255,255,.84);
+      color: rgba(255,255,255,.80);
       font-size: clamp(14px, 1.5vw, 16px);
       line-height: 1.5;
       max-width: 70ch;
@@ -245,22 +242,22 @@
     .photoCredit{
       padding: 10px 14px 14px;
       font-size: 12px;
-      color: rgba(255,255,255,.72);
-      border-top: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
+      color: rgba(255,255,255,.66);
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.22);
     }
     .photoCredit a{
       text-decoration: underline;
       text-underline-offset: 3px;
-      color: rgba(255,255,255,.82);
+      color: rgba(255,255,255,.78);
       transition: opacity .2s ease;
     }
     .photoCredit a:hover{ opacity:.9; }
 
     /* Side card */
     .sideCard{
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 18px;
@@ -275,8 +272,8 @@
       position:absolute;
       inset:-20%;
       background:
-        radial-gradient(circle at 25% 20%, rgba(106,228,255,.12), transparent 40%),
-        radial-gradient(circle at 75% 35%, rgba(124,92,255,.12), transparent 45%);
+        radial-gradient(circle at 25% 20%, rgba(255,255,255,.06), transparent 45%),
+        radial-gradient(circle at 75% 35%, rgba(255,255,255,.05), transparent 48%);
       pointer-events:none;
       opacity:.9;
     }
@@ -291,14 +288,14 @@
       flex:1 1 160px;
       padding: 12px 12px;
       border-radius: 16px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
       transition: transform .16s ease, background .2s ease;
       min-width: 140px;
     }
     .pill:hover{
       transform: translateY(-2px);
-      background: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.08);
     }
     .pill .k{ font-size: 12px; color: var(--muted); margin-bottom: 6px; }
     .pill .v{ font-weight: 900; font-size: 18px; letter-spacing:.2px; }
@@ -312,9 +309,9 @@
       padding: 14px 16px;
       font-weight: 900;
       font-size: 15px;
-      color: rgba(255,255,255,.94);
-      background: linear-gradient(135deg, rgba(106,228,255,.95), rgba(124,92,255,.95));
-      box-shadow: 0 14px 32px rgba(124,92,255,.18), 0 10px 26px rgba(106,228,255,.10);
+      color: rgba(15,17,21,.95);
+      background: linear-gradient(135deg, rgba(255,255,255,.92), rgba(200,203,210,.92));
+      box-shadow: 0 14px 32px rgba(0,0,0,.28);
       transition: transform .15s ease, filter .2s ease, box-shadow .2s ease;
       display:inline-flex;
       align-items:center;
@@ -322,17 +319,17 @@
       gap: 10px;
       width: 100%;
     }
-    .btn:hover{ transform: translateY(-2px); filter: brightness(1.03); }
+    .btn:hover{ transform: translateY(-2px); filter: brightness(1.02); }
     .btn:active{ transform: translateY(0px) scale(.99); }
 
     .btnGhost{
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
       box-shadow: none;
       font-weight: 850;
       color: rgba(255,255,255,.90);
     }
-    .btnGhost:hover{ background: rgba(255,255,255,.11); }
+    .btnGhost:hover{ background: rgba(255,255,255,.09); }
 
     /* Quiz */
     .progressText{ font-size: 13px; color: var(--muted); }
@@ -340,14 +337,14 @@
       width: 240px;
       height: 10px;
       border-radius: 999px;
-      background: rgba(255,255,255,.10);
+      background: rgba(255,255,255,.08);
       overflow:hidden;
-      border:1px solid rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.10);
     }
     .progressBar > div{
       height:100%;
       width:0%;
-      background: linear-gradient(90deg, rgba(106,228,255,.95), rgba(124,92,255,.95));
+      background: linear-gradient(90deg, rgba(255,255,255,.88), rgba(180,184,192,.88));
       transition: width .35s ease;
     }
 
@@ -374,9 +371,9 @@
       text-align:left;
       padding: 16px 14px;
       border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.07);
-      color: rgba(255,255,255,.94);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
       cursor:pointer;
       transition: transform .12s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
       position:relative;
@@ -390,35 +387,36 @@
       content:"";
       position:absolute;
       inset:-20%;
-      background: radial-gradient(circle at 30% 20%, rgba(106,228,255,.18), transparent 45%),
-                  radial-gradient(circle at 70% 60%, rgba(124,92,255,.16), transparent 50%);
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,.10), transparent 45%),
+        radial-gradient(circle at 70% 60%, rgba(255,255,255,.08), transparent 50%);
       opacity:0;
       transition: opacity .25s ease;
     }
     .answerBtn:hover{
       transform: translateY(-2px);
-      background: rgba(255,255,255,.10);
-      border-color: rgba(255,255,255,.22);
-      box-shadow: 0 10px 26px rgba(0,0,0,.22);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.18);
+      box-shadow: 0 10px 26px rgba(0,0,0,.28);
     }
     .answerBtn:hover::after{ opacity:1; }
     .answerBtn:active{ transform: translateY(-1px) scale(.995); }
 
-    .answerBtn[disabled]{ cursor:not-allowed; opacity:.93; }
+    .answerBtn[disabled]{ cursor:not-allowed; opacity:.94; }
     .answerBtn.correct{
-      border-color: rgba(25,211,155,.55);
-      background: rgba(25,211,155,.14);
-      box-shadow: 0 12px 30px rgba(25,211,155,.12);
+      border-color: rgba(155,231,196,.55);
+      background: rgba(155,231,196,.14);
+      box-shadow: 0 12px 30px rgba(155,231,196,.10);
     }
     .answerBtn.wrong{
-      border-color: rgba(255,92,122,.55);
-      background: rgba(255,92,122,.12);
-      box-shadow: 0 12px 30px rgba(255,92,122,.10);
+      border-color: rgba(255,154,169,.55);
+      background: rgba(255,154,169,.12);
+      box-shadow: 0 12px 30px rgba(255,154,169,.08);
     }
 
     .cardFooter{
       padding: 14px 16px 16px;
-      border-top: 1px solid rgba(255,255,255,.10);
+      border-top: 1px solid rgba(255,255,255,.08);
       display:flex;
       gap: 10px;
       align-items:center;
@@ -476,8 +474,8 @@
       transform: translateX(-50%) translateY(20px);
       padding: 10px 12px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.36);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.40);
       backdrop-filter: blur(12px);
       color: rgba(255,255,255,.92);
       font-size: 13px;
@@ -488,14 +486,14 @@
       display:flex;
       align-items:center;
       gap: 8px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
     }
     .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
 
     /* Footer */
     footer{
       padding: 26px 0 34px;
-      color: rgba(255,255,255,.72);
+      color: rgba(255,255,255,.68);
       font-size: 13px;
       text-align:center;
     }
@@ -503,9 +501,9 @@
       display:inline-block;
       padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      box-shadow: 0 10px 30px rgba(0,0,0,.20);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
     }
 
     @media (max-width: 860px){
@@ -533,7 +531,7 @@
       <div class="nav">
         <div class="brand" aria-label="Название теста">
           <span class="dot" aria-hidden="true"></span>
-          <span>Геодезические исследования</span>
+          <span>Грузоперевозки</span>
         </div>
         <nav class="navlinks" aria-label="Навигация">
           <a href="#top">Вверх</a>
@@ -549,24 +547,25 @@
     <!-- HERO -->
     <section class="hero" aria-label="Обложка">
       <div class="heroGrid">
-        <div class="heroMedia" aria-label="Фото электростанции">
-          <!-- ✅ Надёжный источник: Wikimedia Commons (Special:FilePath) + fallback -->
+        <div class="heroMedia" aria-label="Фото грузоперевозок">
+          <!-- ✅ Картинка про грузоперевозки (Wikimedia Commons) + запасной вариант -->
           <img
-            src="https://commons.wikimedia.org/wiki/Special:FilePath/Blenheim%E2%80%93Gilboa_Hydroelectric_Power_Station.jpg?width=2200"
-            alt="Гидроэлектростанция"
+            src="https://commons.wikimedia.org/wiki/Special:FilePath/Truck_transport.jpg?width=2200"
+            alt="Грузоперевозки: грузовик на трассе"
             loading="eager"
-            onerror="this.onerror=null; this.src='https://commons.wikimedia.org/wiki/Special:FilePath/Hydro_electric_power_station.jpg?width=2200';"
+            onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?auto=format&fit=crop&w=2400&q=80';"
+            referrerpolicy="no-referrer"
           />
           <div class="heroOverlay">
             <div class="badge">15 вопросов · 4 варианта · 1 верный</div>
-            <h1><span class="titleAccent">Тест</span>: «Геодезические исследования»</h1>
+            <h1><span class="titleAccent">Тест</span>: «Грузоперевозки»</h1>
             <p class="lead">
-              Базовые понятия о гидроэнергетике, ГЭС, плотинах и геодезических исследованиях — по одному вопросу за раз.
+              Основы грузоперевозок, крупногабаритных грузов и проектирования доставки — по одному вопросу за раз.
             </p>
           </div>
 
           <div class="photoCredit">
-            Фото: <a href="https://commons.wikimedia.org/wiki/File:Blenheim%E2%80%93Gilboa_Hydroelectric_Power_Station.jpg" target="_blank" rel="noopener">Wikimedia Commons</a>
+            Фото: <a href="https://commons.wikimedia.org/" target="_blank" rel="noopener">Wikimedia Commons</a> (если не загрузится — используется резервное фото Unsplash)
           </div>
         </div>
 
@@ -681,157 +680,159 @@
     const ANTI_LONGEST_PROB = 0.85;
     const ANTI_LONGEST_TRIES = 12;
 
-    // Вопросы/ответы + ключ
+    // ==========================
+    // ТЕСТ: «Грузоперевозки» + ключ
+    // ==========================
     const QUESTIONS = [
       {
-        q: "1. Что называют гидроэнергетикой?",
+        q: "1. Что такое грузоперевозки?",
         options: [
-          { id: "A", text: "Получение энергии из тепла воды" },
-          { id: "B", text: "Получение электричества из энергии воды" },
-          { id: "C", text: "Производство воды для хозяйственных нужд" },
-          { id: "D", text: "Использование энергии ветра над водой" }
+          { id: "A", text: "Грузоперевозки — это организация хранения и распределения грузов на складах с оформлением документов и контролем сроков." },
+          { id: "B", text: "Грузоперевозки — это перемещение объектов из одного места в другое с помощью транспорта." },
+          { id: "C", text: "Грузоперевозки — это планирование маршрутов и подбор транспорта без фактической доставки груза до получателя." },
+          { id: "D", text: "Грузоперевозки — это погрузка, разгрузка и перегрузка грузов на терминалах, без обязательного перемещения между городами." }
         ],
         correctId: "B"
       },
       {
-        q: "2. Дайте определение ГЭС.",
+        q: "2. Как называется процесс доставки груза с использованием транспорта?",
         options: [
-          { id: "A", text: "Электростанция, где сжигают топливо для пара" },
-          { id: "B", text: "Станция, где воду очищают и подают в город" },
-          { id: "C", text: "Электростанция, где используют энергию воды" },
-          { id: "D", text: "Станция, где накапливают воду без выработки" }
+          { id: "A", text: "Экспедирование." },
+          { id: "B", text: "Логистика." },
+          { id: "C", text: "Фрахтование." },
+          { id: "D", text: "Грузоперевозки." }
+        ],
+        correctId: "D"
+      },
+      {
+        q: "3. Что такое крупногабаритный груз?",
+        options: [
+          { id: "A", text: "Это груз, который обязательно относится к опасным и требует маркировки, допуска и специальной упаковки." },
+          { id: "B", text: "Это груз, который можно перевозить обычным способом, но только при хорошем состоянии дорог и погоды." },
+          { id: "C", text: "Это груз очень большого размера (или такой, что его нельзя перевозить обычным способом); обычно нужна специальная техника и оборудование." },
+          { id: "D", text: "Это груз, который чаще всего перевозят контейнерами стандартных размеров, чтобы упростить крепление и перегрузку." }
         ],
         correctId: "C"
       },
       {
-        q: "3. Как называется станция, где электричество получают с помощью воды?",
+        q: "4. Почему крупногабаритный груз нельзя перевозить “как обычный”?",
         options: [
-          { id: "A", text: "Теплоэлектростанция (ТЭС)" },
-          { id: "B", text: "Приливная электростанция (ПЭС)" },
-          { id: "C", text: "Гидроэлектростанция (ГЭС)" },
-          { id: "D", text: "Насосная станция водоснабжения" }
+          { id: "A", text: "Потому что он требует обязательной перевозки только ночью и только по дорогам федерального значения без остановок и перегрузок." },
+          { id: "B", text: "Потому что крупные грузы обязательно перевозят в закрытых кузовах с постоянным контролем температуры и влажности." },
+          { id: "C", text: "Потому что он слишком габаритный/тяжёлый, и для него нужны особые способы крепления, специальные машины и тщательно выбранный маршрут." },
+          { id: "D", text: "Потому что крупногабаритные грузы нельзя страховать, и поэтому их перевозят без оформления маршрута и разрешений." }
         ],
         correctId: "C"
       },
       {
-        q: "4. Зачем на многих ГЭС строят плотину?",
+        q: "5. Перечислите основные способы доставки крупногабаритных грузов.",
         options: [
-          { id: "A", text: "Чтобы сделать реку глубже для судоходства" },
-          { id: "B", text: "Чтобы создать водохранилище и регулировать поток" },
-          { id: "C", text: "Чтобы снизить скорость воды на всём участке реки" },
-          { id: "D", text: "Чтобы полностью перекрыть реку без сбросов" }
+          { id: "A", text: "Автомобильным транспортом, по железной дороге, по трубопроводам и по временным технологическим галереям на площадке." },
+          { id: "B", text: "По железной дороге, воздушным путём, водным путём, автомобильной дорогой." },
+          { id: "C", text: "Автомобильным транспортом, водным путём, по канатным дорогам и по временным ледовым трассам в зимний период." },
+          { id: "D", text: "Воздушным путём, по железной дороге, автомобильной дорогой и пешей доставкой на коротких участках до склада." }
         ],
         correctId: "B"
       },
       {
-        q: "5. Почему нельзя построить ГЭС «где угодно», даже если рядом есть река?",
+        q: "6. Назовите четыре вида транспорта, которыми можно доставить крупногабаритный груз на ГЭС (выбери оптимальный ответ).",
         options: [
-          { id: "A", text: "Нужны подходящие грунты и безопасный рельеф" },
-          { id: "B", text: "Важно только, чтобы рядом был большой город" },
-          { id: "C", text: "Главное условие — тёплый климат круглый год" },
-          { id: "D", text: "Достаточно любой реки, место не играет роли" }
+          { id: "A", text: "Поезд, вертолёт, водный транспорт, городской грузовик — если заранее согласовать движение и объезды по населённым пунктам." },
+          { id: "B", text: "Самолёт, водный транспорт, обычный грузовик, поезд — при условии, что груз по габаритам проходит по дорогам и мостам." },
+          { id: "C", text: "Поезд, самолёт, водный транспорт, тягач с прицепом — при условии, что прицеп стандартный и не требует спецразрешений." },
+          { id: "D", text: "Поезд, самолёт, водный транспорт, специальный грузовик/платформа." }
         ],
-        correctId: "A"
+        correctId: "D"
       },
       {
-        q: "6. Что такое водохранилище и как оно связано с плотиной?",
+        q: "7. Почему строительство ГЭС требует особенно много грузоперевозок?",
         options: [
-          { id: "A", text: "Участок реки после плотины с быстрым течением" },
-          { id: "B", text: "Запас воды перед плотиной, который она удерживает" },
-          { id: "C", text: "Подземный резервуар, откуда воду качают насосами" },
-          { id: "D", text: "Канал, по которому воду подают к турбинам" }
-        ],
-        correctId: "B"
-      },
-      {
-        q: "7. Что может случиться, если построить плотину на слабом грунте?",
-        options: [
-          { id: "A", text: "Основание просядет, появятся трещины и риск прорыва" },
-          { id: "B", text: "Станция будет работать тише, но без изменений прочности" },
-          { id: "C", text: "Плотина станет легче, поэтому нагрузка на грунт упадёт" },
-          { id: "D", text: "Уровень воды будет выше, но устойчивость не изменится" }
-        ],
-        correctId: "A"
-      },
-      {
-        q: "8. Что такое геодезические исследования?",
-        options: [
-          { id: "A", text: "Измерение глубин и скорости течения в реке" },
-          { id: "B", text: "Проверка грунтов и местности перед строительством" },
-          { id: "C", text: "Наблюдение за погодой и климатом в районе ГЭС" },
-          { id: "D", text: "Подбор турбины и генератора под проектную мощность" }
+          { id: "A", text: "Потому что приходится подвозить людей к стройке каждый день, а это увеличивает общий объём перевозок сильнее, чем доставка материалов." },
+          { id: "B", text: "Потому что нужно привезти много материалов, техники и крупные детали оборудования, без которых станцию нельзя построить и запустить." },
+          { id: "C", text: "Потому что на строительстве ГЭС запрещено хранить материалы на месте, и всё обязательно привозят строго ко дню монтажа." },
+          { id: "D", text: "Потому что грузовики на стройке делают много рейсов “вхолостую”, и поэтому кажется, что перевозок больше, чем на самом деле." }
         ],
         correctId: "B"
       },
       {
-        q: "9. Какой вид исследований помогает понять, «крепкая ли земля» для строительства плотины?",
+        q: "8. Выбери пример очень тяжелой детали для строительства Красноярской ГЭС?",
         options: [
-          { id: "A", text: "Гидрологические исследования реки" },
-          { id: "B", text: "Экологическое обследование территории" },
-          { id: "C", text: "Геодезические исследования площадки" },
-          { id: "D", text: "Архитектурное проектирование плотины" }
+          { id: "A", text: "Рабочее колесо весит 22,4 тонны." },
+          { id: "B", text: "Ротор генератора весит 2,44 тонны." },
+          { id: "C", text: "Рабочее колесо весит 244 тонны." },
+          { id: "D", text: "Вал турбины весит 244 тонны." }
         ],
         correctId: "C"
       },
       {
-        q: "10. От чего в общем случае зависит, сколько энергии может выработать ГЭС?",
+        q: "9. Зачем составляют проект перевозки перед доставкой крупного оборудования?",
         options: [
-          { id: "A", text: "От расхода воды и перепада уровней (напора)" },
-          { id: "B", text: "От длины плотины и её толщины" },
-          { id: "C", text: "От температуры воды и времени года" },
-          { id: "D", text: "От числа проводов до ближайшего города" }
+          { id: "A", text: "Чтобы заранее выбрать лучший транспорт и маршрут, продумать крепления, погрузку/разгрузку и обеспечить безопасность." },
+          { id: "B", text: "Чтобы выбрать самый быстрый маршрут, даже если на нём есть мосты и повороты, которые придётся проходить без остановок." },
+          { id: "C", text: "Чтобы свести документы к минимуму и начать перевозку без согласований, рассчитывая решить вопросы по дороге." },
+          { id: "D", text: "Чтобы заранее определить стоимость доставки." }
         ],
         correctId: "A"
       },
       {
-        q: "11. Объясните простыми словами, как вода «помогает» получить электричество на ГЭС.",
+        q: "10. Какие “мелочи” важно продумать в проекте перевозки (выбери наиболее полный ответ)?",
         options: [
-          { id: "A", text: "Поток воды вращает турбину, а генератор даёт ток" },
-          { id: "B", text: "Вода нагревает котёл, пар крутит турбину и генератор" },
-          { id: "C", text: "Вода накапливает заряд и отдаёт его в провода станции" },
-          { id: "D", text: "Вода усиливает магнитное поле, и ток появляется сам" }
+          { id: "A", text: "Какой транспорт использовать; по какому маршруту везти; какой крепёж и оборудование нужны; как погрузить и разгрузить груз." },
+          { id: "B", text: "Как оформить страховку, где делать остановки, как выбирать водителя и как хранить груз на промежуточных складах по пути." },
+          { id: "C", text: "Какой транспорт выбрать, сколько будет стоить доставка, какой будет срок перевозки и какие документы оформить у отправителя." },
+          { id: "D", text: "Как правильно упаковать груз, как защитить его от осадков, как промаркировать и как организовать охрану во время стоянок." }
         ],
         correctId: "A"
       },
       {
-        q: "12. Почему инженерам важно уметь контролировать потоки воды на ГЭС?",
+        q: "11. Почему часто приходится использовать автомобильный транспорт, даже если по основному маршруту груз везли поездом или по воде?",
         options: [
-          { id: "A", text: "Чтобы управлять выработкой и не допускать аварий" },
-          { id: "B", text: "Чтобы вода в водохранилище всегда была одинаковой температуры" },
-          { id: "C", text: "Чтобы ускорить течение реки на всём протяжении" },
-          { id: "D", text: "Чтобы увеличить солёность воды для работы турбины" }
+          { id: "A", text: "Потому что автомобильный транспорт доставляет груз на “последнем участке” – от станции/порта/аэропорта до места назначения." },
+          { id: "B", text: "Потому что автомобильный транспорт всегда быстрее и дешевле поезда и воды, поэтому его выбирают даже на дальние расстояния." },
+          { id: "C", text: "Потому что для перевозки поездом и по воде нельзя использовать крупные платформы, а автомобильные прицепы лишены таких ограничений." },
+          { id: "D", text: "Потому что автомобильная перевозка не требует согласования маршрута, и груз можно везти по любой дороге без ограничений." }
         ],
         correctId: "A"
       },
       {
-        q: "13. Назовите минимум два фактора, которые учитывают при выборе места для строительства ГЭС.",
+        q: "12. Какие специальные машины могут использоваться при автоперевозке крупногабаритных грузов?",
         options: [
-          { id: "A", text: "Близость к городу и стоимость земли" },
-          { id: "B", text: "Расход воды в реке и прочность грунтов" },
-          { id: "C", text: "Количество рыбы и прозрачность воды" },
-          { id: "D", text: "Ширина берега и цвет почвы на участке" }
+          { id: "A", text: "Например, автомобили-платформы и машины для длинномерных грузов." },
+          { id: "B", text: "Например, обычные бортовые грузовики и самосвалы, если увеличить количество крепёжных ремней и поставить дополнительные борта." },
+          { id: "C", text: "Например, фургоны с закрытым кузовом и рефрижераторы, чтобы поддерживать температуру и защитить груз от осадков." },
+          { id: "D", text: "Например, легковые тягачи с прицепом и микроавтобусы сопровождения, если груз распределить на небольшие части." }
+        ],
+        correctId: "A"
+      },
+      {
+        q: "13. Почему при перевозке крупногабаритного оборудования нужны квалифицированные специалисты?",
+        options: [
+          { id: "A", text: "Специалисты нужны в основном для оформления документов, а крепление груза обычно типовое и выполняется по шаблону." },
+          { id: "B", text: "Квалификация требуется только водителю, а погрузка и крепление выполняются одинаково для любых грузов." },
+          { id: "C", text: "Груз тяжёлый, дорогой и его легко повредить; ошибки при погрузке и креплении могут привести к аварии и поломке." },
+          { id: "D", text: "Без специалистов нельзя выбрать самый короткий маршрут, хотя по безопасности и креплению это обычно не критично." }
+        ],
+        correctId: "C"
+      },
+      {
+        q: "14. Сколько примерно весит вал турбины для Иркутской ГЭС?",
+        options: [
+          { id: "A", text: "Вал турбины весит 46,5 тонн" },
+          { id: "B", text: "Вал турбины весит 4,65 тонн" },
+          { id: "C", text: "Вал турбины весит 465 тонн" },
+          { id: "D", text: "Вал турбины весит 465 кг" }
+        ],
+        correctId: "A"
+      },
+      {
+        q: "15. Объясните, почему для перевозки оборудования ГЭС “нет типовых решений”?",
+        options: [
+          { id: "A", text: "Потому что правила перевозок постоянно меняются, и поэтому даже одинаковые грузы всегда приходится перевозить по совершенно разным схемам." },
+          { id: "B", text: "Потому что каждая ГЭС уникальна, оборудование делают по спецзаказу, и каждый маршрут/груз требуют своего плана перевозки." },
+          { id: "C", text: "Потому что перевозки зависят от времени года, а оборудование и маршруты обычно стандартные и повторяются." },
+          { id: "D", text: "Потому что типовые решения есть, но их не используют, чтобы не тратить время на согласование и оформление перевозки." }
         ],
         correctId: "B"
-      },
-      {
-        q: "14. Если после сильных дождей воды стало намного больше, почему станции важен «запас» в виде водохранилища и управление потоком?",
-        options: [
-          { id: "A", text: "Чтобы держать уровень и безопасно пропускать избыток воды" },
-          { id: "B", text: "Чтобы вода не попадала на турбины даже при нормальной работе" },
-          { id: "C", text: "Чтобы всегда поддерживать один и тот же расход без изменений" },
-          { id: "D", text: "Чтобы после дождей обязательно резко увеличить мощность" }
-        ],
-        correctId: "A"
-      },
-      {
-        q: "15. Как вы думаете, почему геодезические исследования проводят до строительства, а не после?",
-        options: [
-          { id: "A", text: "Потому что заранее проще выбрать место и избежать ошибок" },
-          { id: "B", text: "Потому что после строительства измерять координаты невозможно" },
-          { id: "C", text: "Потому что после строительства исправления всегда дешёвые" },
-          { id: "D", text: "Потому что изыскания нужны только для сдачи объекта" }
-        ],
-        correctId: "A"
       }
     ];
 
@@ -876,9 +877,9 @@
     }
 
     function showToast(text, kind){
-      const toast = $("#toast");
+      const toast = document.querySelector("#toast");
       toast.textContent = text;
-      toast.style.borderColor = kind === "ok" ? "rgba(25,211,155,.35)" : "rgba(255,92,122,.35)";
+      toast.style.borderColor = kind === "ok" ? "rgba(155,231,196,.35)" : "rgba(255,154,169,.35)";
       toast.classList.add("show");
       clearTimeout(showToast._t);
       showToast._t = setTimeout(()=> toast.classList.remove("show"), 900);
@@ -1021,7 +1022,7 @@
     });
 
     // Init
-    $("#statQ").textContent = String(QUESTIONS.length);
+    document.querySelector("#statQ").textContent = String(QUESTIONS.length);
     answersWrap.innerHTML = "";
     idx = -1;
     attemptText.textContent = `Попытка: ${attempt}`;
